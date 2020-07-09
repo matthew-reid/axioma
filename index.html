@@ -1,0 +1,76 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Axioma</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.4/dagre-d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pegjs/0.9.0/peg.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/addon/hint/show-hint.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/addon/mode/simple.js"></script>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/codemirror.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/addon/hint/show-hint.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Axioma</h1>
+		<h5>Entity-Relation Graphing Tool</h5>
+		<br>
+		<form>
+			Load Preset: <select id="models" name="models"></select>
+		</form>
+		<br>
+		<div class="row">
+			<div class="col-sm-6">
+				<h3>Definition</h3>
+				<div class="editor">
+					<textarea class="code" id="modelDefinitionInput" name="modelDefinitionInput">
+					</textarea>
+				</div>
+				<div id="errorMessageLabel" class="errorLabel">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<h3>Help</h3>
+				<h5>Code Editor</h4>
+				<b>Autocomplete</b> Press ~, select with tab key.
+				<br>
+				<b>Define label:</b> &lt;type&gt; &lt;name&gt;
+				<br>
+				Example: <code>object Car</code>
+				<br>
+				Supported types: object, property, alias
+				<br>
+				<b>Define relation type:</b> relationType &lt;subject type&gt; &lt;name&gt; &lt;other type&gt;
+				<br>
+				Example: <code>relationType object hasComponent object</code>
+				<br>
+				<b>Define relation:</b> &lt;subject&gt; &lt;relation type&gt; &lt;other&gt;
+				<br>
+				Example: <code>Car hasComponent Engine</code>
+				<br>
+				<b>Predefined relation types:</b> hasMember, hasProperty, hasAlias
+				<br>
+				<b>Comment:</b> Prefix with #
+			</div>
+		</div>
+		<br>
+		<h3>Graph</h3>
+
+		<svg width=900 height=400>
+		  <g/>
+		</svg>
+
+		<script src="dsl-definition.js"></script>
+		<script src="parse-dsl.js"></script>
+		<script src="code-editor.js"></script>
+		<script src="graph.js"></script>
+		<script src="preset-models.js"></script>
+	</div>
+</body>
